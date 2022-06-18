@@ -1,0 +1,20 @@
+.cover {
+  background: url("/media/vote.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 80vh;
+}
+
+.cover1 {
+  background: url("/media/vote2.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.cover2 {
+  background: url("/media/vote3.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}

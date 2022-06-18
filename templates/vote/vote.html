@@ -1,0 +1,51 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Cast your vote {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content1 %}
+
+<div class="card m-4">
+    <div class="card-header bg-light">
+      Cast your vote
+    </div>
+    
+    <form method="POST">
+        {% csrf_token %}
+    
+        <div class="card-body shadow-lg">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5> {{Item_to_be_polled.poll_name}} </h5>
+                </div>
+            </div>
+        
+        <br>
+
+        <div class="row bg-light">
+            <div class="col-md-3">
+                <input type="radio" name="poll" value="option1"> {{Item_to_be_polled.option_one}}
+            </div>
+            <div class="col-md-3">
+                <input type="radio" name="poll" value="option2"> {{Item_to_be_polled.option_two}}
+            </div>
+            <div class="col-md-3">
+                <input type="radio" name="poll" value="option3"> {{Item_to_be_polled.option_three}}
+
+            </div>
+        </div>
+
+        <br>
+
+        <input class="btn btn-sm btn-success" type="submit" value="Submit">
+        <a href="{% url 'home' %}"class="btn btn-sm btn-outline-dark">Cancel</a>
+
+        </div>
+
+    </form>
+
+  </div>
+
+
+{% endblock %}

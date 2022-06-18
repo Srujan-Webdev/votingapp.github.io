@@ -1,0 +1,91 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Yet to Poll {% endblock %}
+
+
+{% block content1 %}
+
+<div> <h2 class="text-info text-center"> Polls for which Voting hasn't been started </h2>  </div> 
+
+<div class="border p-4 m-1 shadow rounded">
+
+    <h3 class="bg-light"> Available Polls: </h3>
+
+    <div class="row p-1">
+
+        {% for Item_to_be_polled in poll_page.object_list %}
+
+        <hr>
+        <div class="col-md-9">
+            
+            <h5> <p> {{Item_to_be_polled.poll_name}} </p> </h5>
+            
+        </div>
+
+        <div class="col-md-3">
+            <a class="btn btn-success btn-sm" href="{% url 'vote' Item_to_be_polled.id %}">Vote</a>
+            <a class="btn btn-warning btn-sm" href="{% url 'result' Item_to_be_polled.id %}">Result</a>
+
+        </div>
+        
+        {% endfor %}
+
+
+</div>
+
+
+<!--Pagination Starts-->
+<div class="container">
+
+    <div class="row m-4">
+
+        <div class="col-md-4 offset-md-3">
+
+            <p>Page:{{poll_page.number}}/{{poll_page.paginator.num_pages}} </p>
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                  <li class="page-item">
+                    {% if poll_page.has_previous %}
+                    <a class="page-link" href="{% url 'yet_to_poll' %}?page={{poll_page.previous_page_number}}">Previous</a>
+                    {% endif %}
+                  </li>
+                  
+                  {% for num_page in poll_page.paginator.page_range %}
+                  
+                  {% if num_page == poll_page.number %}
+                  
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="{% url 'yet_to_poll' %}?page={{ num_page }}">{{ num_page }}</a>
+                  </li>
+                  
+                  {% else %}
+                  
+                  <li class="page-item" aria-current="page">
+                    <a class="page-link" href="{% url 'yet_to_poll' %}?page={{ num_page }}">{{ num_page }}</a>
+                  </li>
+                  
+                  {% endif %}
+
+                  {% endfor %}
+
+                  <li class="page-item">
+                    {% if poll_page.has_next %}
+                    <a class="page-link" href="{% url 'yet_to_poll' %}?page={{poll_page.next_page_number}}">Next</a>
+                    {% endif %}
+                  </li>
+                </ul>
+              </nav>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--Pagination Ends-->
+
+
+
+
+{% endblock %}

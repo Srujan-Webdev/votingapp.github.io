@@ -1,0 +1,59 @@
+
+{% extends 'partials/base.html' %}
+
+{% block title %} Create Poll {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content1 %}
+
+<div class="card m-4">
+    <div class="card-header">
+      Poll Result
+    </div>
+    
+    
+    <div class="card-body shadow-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="card-title">{{Item_polled.poll_name}}</h5>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group p-4">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{Item_polled.option_one}}
+                      <span class="badge bg-primary rounded-pill">{{Item_polled.option_one_count}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{Item_polled.option_two}}
+                      <span class="badge bg-primary rounded-pill">{{Item_polled.option_two_count}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{Item_polled.option_three}}
+                      <span class="badge bg-primary rounded-pill">{{Item_polled.option_three_count}}</span>
+                    </li>
+                  </ul>
+                
+                
+            </div>
+        </div>
+    </div>
+        
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Total Votes
+                <span class="badge bg-primary rounded-pill">{{Item_polled.total}}</span>
+                </li>
+            </div>
+            
+            <div class="col-md-3 offset-6">
+                <a href="{% url 'home' %}" class="btn btn-outline-dark"> Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Voting App {% endblock %}
+
+
+{% block content1 %}
+
+
+
+<div> <h1 class="text-info text-center"> Welcome to Poll App!!!!!! </h1>  </div> 
+
+<div class="border p-4 m-1 shadow rounded ">
+
+    <h3 class="bg-light"> Available Polls: </h3>
+
+    {% for message in messages%}		
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+    {% endfor %}
+
+    <div class="row p-1">
+
+        {% for Polls_item in poll_page.object_list %}
+
+        <hr>
+        <div class="col-md-9">
+            
+            <!-- <h5> <p> {{Polls_item.poll_name}} </p> </h5> -->
+            <a href="{% url 'poll_details' Polls_item.id %}" class="text-primary btn btn-sm"> <h5> <p> {{Polls_item.poll_name}} </p> </h5> </a>
+
+        </div>
+
+        <div class="col-md-3">
+            <a class="btn btn-success btn-sm" href="{% url 'vote' Polls_item.id %}">Vote</a>
+            <a class="btn btn-warning btn-sm" href="{% url 'result' Polls_item.id %}">Result</a>
+
+        </div>
+        
+        {% endfor %}
+
+
+</div>
+
+
+
+<!--Pagination Starts-->
+<div class="container">
+
+    <div class="row m-4">
+
+        <div class="col-md-4 offset-md-3">
+
+            <p>Page:{{poll_page.number}}/{{poll_page.paginator.num_pages}} </p>
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                  <li class="page-item">
+                    {% if poll_page.has_previous %}
+                    <a class="page-link" href="{% url 'home' %}?page={{poll_page.previous_page_number}}">Previous</a>
+                    {% endif %}
+                  </li>
+                  
+                  {% for num_page in poll_page.paginator.page_range %}
+                  
+                  {% if num_page == poll_page.number %}
+                  
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="{% url 'home' %}?page={{ num_page }}">{{ num_page }}</a>
+                  </li>
+                  
+                  {% else %}
+                  
+                  <li class="page-item" aria-current="page">
+                    <a class="page-link" href="{% url 'home' %}?page={{ num_page }}">{{ num_page }}</a>
+                  </li>
+                  
+                  {% endif %}
+
+                  {% endfor %}
+
+                  <li class="page-item">
+                    {% if poll_page.has_next %}
+                    <a class="page-link" href="{% url 'home' %}?page={{poll_page.next_page_number}}">Next</a>
+                    {% endif %}
+                  </li>
+                </ul>
+              </nav>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--Pagination Ends-->
+
+
+
+
+
+
+
+{% endblock %}

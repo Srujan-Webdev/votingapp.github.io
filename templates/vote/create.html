@@ -1,0 +1,60 @@
+{% extends 'partials/base.html' %}
+
+{% block title %} Create Poll {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content1 %}
+
+<div class="card m-4">
+    <div class="card-header">
+      Create a new poll
+    </div>
+    
+    <form method="POST">
+        {% csrf_token %}
+    
+        <div class="card-body shadow-lg">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="card-title">Enter the Poll Details</h5>
+                    <!-- <input type="text" placeholder="Enter the Poll"> -->
+                    <!-- <textarea placeholder="Enter the Poll" rows="3" cols="100"></textarea> -->
+                    {{poll_create_form.poll_name | as_crispy_field}}
+                </div>
+            </div>
+        
+        <br>
+
+        <div class="row">
+            <div class="col-md-4">
+                <!-- <h6> Option 1</h6> -->
+                <!-- <input type="text" placeholder="Enter Option1"> -->
+                {{poll_create_form.option_one | as_crispy_field}}
+            </div>
+            <div class="col-md-4">
+                <!-- <h6> Option 2</h6> -->
+                <!-- <input type="text" placeholder="Enter Option2"> -->
+                {{poll_create_form.option_two | as_crispy_field}}
+            </div>
+            <div class="col-md-4">
+                <!-- <h6> Option 3</h6> -->
+                <!-- <input type="text" placeholder="Enter Option3"> -->
+                {{poll_create_form.option_three | as_crispy_field}}
+
+            </div>
+        </div>
+
+        <br>
+
+        <input class="btn btn-sm btn-success" type="submit" value="Create">
+        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-danger bg-opacity-10">Cancel</a>
+        
+        </div>
+
+    </form>
+
+  </div>
+
+
+{% endblock %}

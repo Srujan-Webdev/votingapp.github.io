@@ -1,0 +1,62 @@
+
+{% extends 'partials/base.html' %}
+
+{% block title %} Poll Details {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content1 %}
+
+<div class="card m-4">
+    <div class="card-header">
+      Poll Details
+
+    {% if Polls_items_details.user == request.user %}
+    <a class="btn btn-outline-warning btn-sm offset-8" href="{% url 'poll_update' Polls_items_details.id %}">Edit</a>
+    <a class="btn btn-outline-danger btn-sm" href="{% url 'poll_delete' Polls_items_details.id %}">Delete</a>
+    {% endif %}
+    
+    </div>
+    
+    
+    <div class="card-body shadow-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-primary">Question:</h4>
+                <h5 class="card-title">{{Polls_items_details.poll_name}}</h5>
+            </div>
+            <div class="col-md-6">
+                <br>
+                <h4 class="text-primary">Options:</h4>
+                <ul class="list-group p-1">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{Polls_items_details.option_one}}
+                      <!-- <span class="badge bg-primary rounded-pill">{{Item_polled.option_one_count}}</span> -->
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{Polls_items_details.option_two}}
+                      <!-- <span class="badge bg-primary rounded-pill">{{Item_polled.option_two_count}}</span> -->
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{Polls_items_details.option_three}}
+                      <!-- <span class="badge bg-primary rounded-pill">{{Item_polled.option_three_count}}</span> -->
+                    </li>
+                  </ul>
+                
+                
+            </div>
+        </div>
+    </div>
+        
+    <div class="card-footer">
+        <div class="row">
+            
+            <div class="col-md-3 offset-9">
+                <a href="{% url 'home' %}" class="btn btn-outline-dark"> Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
